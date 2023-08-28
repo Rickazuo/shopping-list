@@ -9,14 +9,30 @@ import legumeTag from "../../../public/legumeTag.svg";
 import meatTag from "../../../public/meatTag.svg";
 import { useState } from "react";
 
-export default function List({ items }) {
+export default function List({ items, setItems }) {
   const [checkedItems, setCheckedItems] = useState([]);
+  const [deleteConfirmationIndex, setDeleteConfirmationIndex] = useState(-1);
 
   const handleCheckboxChange = (index) => {
     const newCheckedItems = [...checkedItems];
     newCheckedItems[index] = !newCheckedItems[index];
     setCheckedItems(newCheckedItems);
   };
+
+  const handleDeleteConfirmation = (index) => {
+    if (deleteConfirmationIndex === index) {
+      setDeleteConfirmationIndex(-1); // Reset when clicking again
+    } else {
+      setDeleteConfirmationIndex(index);
+    }
+  };
+
+  const handleDelete = (index) => {
+    const updatedItems = items.filter((_, i) => i !== index);
+    setCheckedItems(new Array(updatedItems.length).fill(false));
+    setItems(updatedItems);
+  };
+
   return (
     <main className={styles.main}>
       {items.map((item, index) => (
@@ -67,11 +83,24 @@ export default function List({ items }) {
               height={32}
             />
             <Image
+              className={styles.about}
               src={detailsIcon}
               alt="tag of fruit product"
               width={20}
               height={20}
+              onClick={() => handleDeleteConfirmation(index)}
             />
+            {deleteConfirmationIndex === index && (
+              <span className={styles.deleteConfirmation}>
+                Delete?{" "}
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(index)}
+                >
+                  Yes
+                </button>
+              </span>
+            )}
           </div>
         </div>
       ))}

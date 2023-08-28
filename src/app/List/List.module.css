@@ -73,3 +73,40 @@
   text-decoration: line-through;
   color: #999;
 }
+
+.about {
+  cursor: pointer;
+}
+
+.deleteConfirmation {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+  color: red;
+}
+
+.deleteButton {
+  text-align: center;
+  max-width: 4rem;
+  background-color: var(--produto-purple-dark);
+  border: none;
+  border-radius: 0.625rem;
+  padding: 0.5rem;
+
+  color: var(--base-gray-100, #fbf9fe);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  filter: brightness(130%);
+}

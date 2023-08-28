@@ -19,7 +19,7 @@ export default function Home() {
       <div>
       <h1 className={styles.title}>Lista de Compras</h1>
       <AddItem addItemToList={addItemToList} />
-      <List items={items} />
+      <List items={items} setItems={setItems} />
       </div>
     </main>
   )

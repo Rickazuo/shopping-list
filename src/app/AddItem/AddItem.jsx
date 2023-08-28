@@ -11,16 +11,6 @@ export default function AddItem({ addItemToList }) {
   const [category, setCategory] = useState("");
 
   const handleAddItem = () => {
-    if (
-      item.trim() === "" ||
-      quantity.trim() === "" ||
-      unity.trim() === "" ||
-      category.trim() === ""
-    ) {
-      alert("Por favor preencha todos os campos");
-      return;
-    }
-
     const newItem = {
       item,
       quantity,
@@ -28,11 +18,6 @@ export default function AddItem({ addItemToList }) {
       category,
     };
     addItemToList(newItem);
-
-    setItem("");
-    setQuantity("");
-    setUnity("");
-    setCategory("");
   };
 
   return (
