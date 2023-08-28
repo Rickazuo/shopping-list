@@ -2,30 +2,92 @@ import Image from "next/image";
 import styles from "./AddItem.module.css";
 
 import addButton from "../../../public/addButton.png";
+import { useState } from "react";
 
-export default function AddItem() {
+export default function AddItem({ addItemToList }) {
+  const [item, setItem] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [unity, setUnity] = useState("");
+  const [category, setCategory] = useState("");
+
+  const handleAddItem = () => {
+    if (
+      item.trim() === "" ||
+      quantity.trim() === "" ||
+      unity.trim() === "" ||
+      category.trim() === ""
+    ) {
+      alert("Por favor preencha todos os campos");
+      return;
+    }
+
+    const newItem = {
+      item,
+      quantity,
+      unity,
+      category,
+    };
+    addItemToList(newItem);
+
+    setItem("");
+    setQuantity("");
+    setUnity("");
+    setCategory("");
+  };
+
   return (
     <main className={styles.main}>
       <section className={styles.section}>
         <label className={styles.label}>Item</label>
-        <input className={styles.input} type="text" />
+        <input
+          onChange={(e) => setItem(e.target.value)}
+          className={styles.input}
+          type="text"
+        />
       </section>
       <section className={styles.section}>
-        <label className={styles.label}>Quantidade</label>
+        <label id="item" className={styles.label}>
+          Quantidade
+        </label>
         <div className={styles.inputSelect}>
-          <input className={styles.inputTogether} type="text" />
-          <select className={styles.selectTogether} name="" id="">
-            <option value="">Un.</option>
+          <input
+            onChange={(e) => setQuantity(e.target.value)}
+            className={styles.inputTogether}
+            type="text"
+            id="item"
+          />
+          <select
+            onChange={(e) => setUnity(e.target.value)}
+            className={styles.selectTogether}
+            name=""
+            id=""
+          >
+            <option value="">Selecione</option>
+            <option value="Gramas">Gramas</option>
+            <option value="Litros">Litros</option>
+            <option value="Unidades">Unidades</option>
           </select>
         </div>
       </section>
       <section className={styles.section}>
-        <label className={styles.label}>Categoria</label>
-        <select className={styles.select} name="" id="">
+        <label id="category" className={styles.label}>
+          Categoria
+        </label>
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          className={styles.select}
+          name=""
+          id="category"
+        >
           <option value="">Selecione</option>
+          <option value="Açogue">Açogue</option>
+          <option value="Bebida">Bebida</option>
+          <option value="Fruta">Fruta</option>
+          <option value="Legume">Legume</option>
+          <option value="Padaria">Padaria</option>
         </select>
       </section>
-      <button className={styles.addButton}>
+      <button onClick={handleAddItem} className={styles.addButton}>
         <Image
           src={addButton}
           alt="icon of add button"
